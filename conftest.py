@@ -14,8 +14,10 @@ def driver(request):
     logger.info("Iniciando navegador...")
     options = Options()
     
-    # Asignar la ruta explícita del binario de Brave
-    options.binary_location = "/usr/bin/brave-browser"
+    # Usar Brave si existe localmente; si no (CI/CD de GitHub o evaluador), usa Chrome por defecto
+    brave_path = "/usr/bin/brave-browser"
+    if os.path.exists(brave_path):
+        options.binary_location = brave_path
 
     # Argumentos para estabilidad
     options.add_argument("--start-maximized")
@@ -25,9 +27,10 @@ def driver(request):
     options.add_argument("--no-sandbox")
     options.add_argument("--disable-dev-shm-usage")
     
-    # Modo headless opcional (útil para CI/CD)
+    # Modo headless opcional (clave para CI/CD)
     if os.getenv("HEADLESS", "false").lower() == "true":
         options.add_argument("--headless=new")
+        options.add_argument("--window-size=1920,1080")
 
     # En Selenium 4.25+ se puede instanciar directamente con options
     # Selenium Manager resolverá el driver compatible de forma automática
