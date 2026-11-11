@@ -1,0 +1,30 @@
+[
+  {
+    "case_id": "TC_LOGIN_01",
+    "description": "Usuario bloqueado",
+    "username": "locked_out_user",
+    "password": "secret_sauce",
+    "expected_error": "Epic sadface: Sorry, this user has been locked out."
+  },
+  {
+    "case_id": "TC_LOGIN_02",
+    "description": "Password inválido",
+    "username": "standard_user",
+    "password": "wrong_password",
+    "expected_error": "Epic sadface: Username and password do not match any user in this service"
+  },
+  {
+    "case_id": "TC_LOGIN_03",
+    "description": "Usuario vacío",
+    "username": "",
+    "password": "secret_sauce",
+    "expected_error": "Epic sadface: Username is required"
+  },
+  {
+    "case_id": "TC_LOGIN_04",
+    "description": "Password vacío",
+    "username": "standard_user",
+    "password": "",
+    "expected_error": "Epic sadface: Password is required"
+  }
+]
