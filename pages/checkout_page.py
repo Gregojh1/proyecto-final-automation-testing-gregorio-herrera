@@ -14,8 +14,8 @@ class CheckoutPage(BasePage):
         self.type_text(self.LAST_NAME_INPUT, last_name)
         self.type_text(self.POSTAL_CODE_INPUT, postal_code)
         
-        # Asegurar scroll y clic en continue
-        btn_continue = self.find_element(self.CONTINUE_BTN)
+        # Scroll y clic usando self.driver directamente
+        btn_continue = self.driver.find_element(*self.CONTINUE_BTN)
         self.driver.execute_script("arguments[0].scrollIntoView(true);", btn_continue)
         try:
             self.click(self.CONTINUE_BTN)
@@ -23,8 +23,8 @@ class CheckoutPage(BasePage):
             self.driver.execute_script("arguments[0].click();", btn_continue)
 
     def finish_order(self):
-        # Asegurar visibilidad con scroll y fallback por JS para modo headless en CI
-        btn_finish = self.find_element(self.FINISH_BTN)
+        # Scroll y clic usando self.driver directamente
+        btn_finish = self.driver.find_element(*self.FINISH_BTN)
         self.driver.execute_script("arguments[0].scrollIntoView(true);", btn_finish)
         try:
             self.click(self.FINISH_BTN)
